@@ -27,7 +27,7 @@
     }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (hover: none) and (pointer: coarse) {
     .main-header {
         justify-self: center;
     }
