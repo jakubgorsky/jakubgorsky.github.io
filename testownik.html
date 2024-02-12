@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/window.css">
+<title>Question Converter</title>
+<style>
+/* Necessary CSS rules for visual outcome */
+
+.button {
+    font: inherit;
+    cursor: pointer;
+    padding: 1rem;
+    font-size: 1rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(0,0,0,0.4);
+    box-shadow: 0.5rem 0.5rem rgba(20,20,20,0.4);
+    transition-duration: 0.2s;
+}
+
+.button:hover {
+    background: rgba(100,100,100,1);
+    color: white;
+    cursor: pointer;
+}
+
+/* Additional CSS rules for styling buttons and inputs */
+input[type=text], input[type=checkbox] {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(0,0,0,0.4);
+    transition-duration: 0.2s;
+}
+
+input[type=text]{
+    white-space: pre-wrap;
+}
+
+form * {
+    padding: 0.1rem;
+}
+
+input[type="checkbox"] {
+    -webkit-appearance: none; /* Remove default appearance */
+    -moz-appearance: none;
+    appearance: none;
+    width: 1rem; /* Set width and height */
+    height: 1rem;
+    border: 1px solid rgba(0,0,0,0.4); /* Add border */
+    border-radius: 4px; /* Add border radius */
+    background-color: #fff; /* Set background color */
+    cursor: pointer; /* Add cursor pointer */
+    transition: all 0.3s; /* Add transition for smooth hover effect */
+}
+
+input[type="checkbox"]:checked {
+    background-color: rgba(100,100,100,1); /* Change background color when checked */
+    border:1px solid rgba(0,0,0,1) /* Change border color when checked */
+}
+
+input[type="checkbox"]:checked:hover {
+    background-color: rgba(100,100,100,1); /* Change background color when checked */
+    border:1px solid rgba(0,0,0,1); /* Change border color when checked */
+}
+
+input[type=text]:hover, input[type=checkbox]:hover {
+    box-shadow: 0.1rem 0.1rem 0.2rem rgba(20,20,20,0.4);
+    border: 1px solid rgba(0,0,0,1);
+    background: #eee;
+}
+
+input[type=submit] {
+    padding: 0.5rem 2rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(0,0,0,0.4);
+    background-color: #fff;
+    transition-duration: 0.2s;
+}
+
+input[type=submit]:hover {
+    cursor: pointer;
+    font-size: 1.1rem;
+    box-shadow: 0.1rem 0.1rem 0.2rem rgba(20,20,20,0.4);
+    background: rgba(100,100,100,1);
+    border: 1px solid rgba(0,0,0,1);
+    color: white;
+}
+
+.output {
+    background-color: #1a1a1a; /* Darkened background color */
+    color: #fff; /* White text color */
+    padding: 1rem;
+    border-radius: 0 0 1rem 1rem; /* Rounded corners only on the bottom */
+    border-width: 1px;
+    border-color: rgba(0,0,0,0.4);
+    border-style: none solid solid solid;
+}
+
+.code-block {
+    background-color: #0D1117;
+    color: #c9d1d9;
+    border-radius: 0 0 1rem 1rem;
+    padding: 1rem;
+    font-family: monospace;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    box-shadow: 0.5rem 0.5rem rgba(20,20,20,0.4);
+    text-wrap: wrap;
+}
+
+.controls{
+    display:flex;
+    width:100%;
+    justify-content:left;
+}
+
+.controls * {
+    margin: 0.1rem;
+}
+
+.add {
+    background-color: #b2ff86;
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    font-size: 2rem;
+    padding: 0;
+    border-radius: 0.5rem;
+    /* font-family: monospace; */
+}
+
+.remove {
+    background-color: #ff8686;
+    width: 2rem;
+    height: 2rem;
+    font-size: 2rem;
+    padding: 0;
+    border-radius: 0.5rem;
+    /* font-family: monospace; */
+}
+
+.convert {
+    margin-bottom: 1rem;
+}
+
+.input-block {
+    background-color: #f2f2f2;
+    color: #333;
+    border-radius: 0 0 1rem 1rem;
+    padding: 1rem;
+    font-family: monospace;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    box-shadow: 0.5rem 0.5rem rgba(20,20,20,0.4);
+    text-wrap: wrap;
+    border-width: 1px;
+    border-color: rgba(0,0,0,0.4);
+    border-style: none solid solid solid;
+}
+
+.form-block {
+    background-color: #f2f2f2;
+    color: #333;
+    border-radius: 0 0 1rem 1rem;
+    padding: 1rem;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    box-shadow: 0.5rem 0.5rem rgba(20,20,20,0.4);
+    text-wrap: wrap;
+    border-width: 1px;
+    border-color: rgba(0,0,0,0.4);
+    border-style: none solid solid solid;
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="input-container standout">
+        <div class="header">
+            <h2>Input</h2>
+        </div>
+        <div class="padded">
+            <div class="header-small">
+                <span>Input</span><button class="small-header-button" onclick="readText()" id="copy-button-input"><img src="clipboard.png"><span>^Process question</span></button></div>
+            <div class="input input-block" id="input" contenteditable="true">Paste your question here.</div>
+        </div>
+    </div>
+    <div class="form-container standout">
+        <div class="header">
+            <h2>Edit question</h2>
+        </div>
+        <div class="padded">
+            <!-- <div class="header-small"> -->
+                <span>Question data</span><button type="button" class="small-header-button" onclick="convertQuestions()"><span>Convert -></span></button>
+            <!-- </div> -->
+            <!-- <div class="form-block"> -->
+                <form id="questionForm">
+                    <div id="questionInputs">
+                        <div>
+                            <label for="question">Question:</label>
+                            <input type="text" name="question" required>
+                        </div>
+                        <div class="answer-inputs">
+                            <div class="answer-input">
+                                <label for="answer">Answer 1:</label>
+                                <input type="text" name="answer">
+                                <input type="checkbox" name="isChecked">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="controls">
+                        <button type="button" class="button add" onclick="addAnswer()">+</button>
+                        <button type="button" class="button remove" onclick="removeAnswer()">-</button>
+                    </div>
+                </form>
+            <!-- </div> -->
+        </div>
+    </div>
+    <div class="output-container standout">
+        <div class="header">
+            <h2>Output</h2>
+        </div>
+        <div class="padded">
+            <div class="header-small">
+                <span>Output</span><button class="small-header-button" onclick="copyToClipboard()" id="copy-button"><img src="clipboard.png"><span>Copy to Clipboard</span></button></div>
+            <div class="output code-block" id="output">Press "Convert" to convert your questions to an output that's compatible with Testownik app.</div>
+        </div>
+    </div>
+</div>
+<script>
+    function addAnswer() {
+        const answerInputs = document.querySelectorAll('.answer-inputs');
+        const lastAnswerInputs = answerInputs[answerInputs.length - 1];
+        const lastAnswerInput = lastAnswerInputs.children[lastAnswerInputs.children.length - 1];
+
+        const newAnswerIndex = lastAnswerInputs.children.length + 1;
+        const newAnswerDiv = document.createElement('div');
+        newAnswerDiv.innerHTML = `
+            <label for="answer">Answer ${newAnswerIndex}:</label>
+            <input type="text" name="answer">
+            <input type="checkbox" name="isChecked">
+        `;
+        newAnswerDiv.className += "answer-input";
+        lastAnswerInputs.insertBefore(newAnswerDiv, lastAnswerInput.nextSibling);
+    }
+
+    function removeAnswer() {
+        const answerInputs = document.querySelectorAll('.answer-inputs');
+        const lastAnswerInputs = answerInputs[answerInputs.length - 1];
+        if (lastAnswerInputs.children.length > 1) { // Ensure at least one answer remains
+            lastAnswerInputs.removeChild(lastAnswerInputs.lastElementChild);
+        }
+    }
+
+    function convertQuestions() {
+        const questions = document.getElementsByName('question');
+        const answerContainers = document.querySelectorAll('.answer-inputs');
+        const outputTextArray = [];
+
+        for (let i = 0; i < questions.length; i++) {
+            const question = questions[i].value;
+            const answers = [];
+            const checkboxes = answerContainers[i].querySelectorAll('input[type="checkbox"]');
+            const answerInputs = answerContainers[i].querySelectorAll('input[type="text"]');
+
+            for (let j = 0; j < answerInputs.length; j++) {
+                const answer = answerInputs[j].value;
+                const isChecked = checkboxes[j].checked ? 1 : 0;
+                answers.push({ answer, isChecked });
+            }
+
+            let outputText = 'X';
+            for (let k = 0; k < answers.length; k++) {
+                outputText += answers[k].isChecked;
+            }
+            outputText += '\n' + question + '\n';
+            for (let k = 0; k < answers.length; k++) {
+                outputText += answers[k].answer + '\n';
+            }
+            outputTextArray.push(outputText);
+        }
+
+        document.getElementById('output').innerText = outputTextArray.join('\n');
+    }
+    function copyToClipboard() {
+        const outputElement = document.getElementById('output');
+        const range = document.createRange();
+        range.selectNode(outputElement);
+        window.getSelection().removeAllRanges(); // Clear current selection
+        window.getSelection().addRange(range); // Select the text
+        document.execCommand('copy'); // Copy text to clipboard
+        window.getSelection().removeAllRanges(); // Clear current selection after copying
+        document.getElementById('copy-button').innerText = "Copied!";
+        setTimeout(() => {document.getElementById('copy-button').innerText = "Copy to Clipboard";}, 5000);
+    }
+    function readText() {
+    const inputText = document.getElementById('input').innerText.trim().split('\n');
+    const question = inputText[1];
+    const answers = inputText.slice(2);
+    const checkboxesStatus = inputText[0].split('').map(Number);
+    if (inputText[0] === "Paste your question here."){
+        return;
+    }
+
+    // Set question
+    const questionInput = document.getElementsByName('question')[0];
+    if (questionInput) {
+        questionInput.value = question;
+    }
+
+    // Adjust the number of answer inputs
+    const currentAnswerInputs = document.querySelectorAll('.answer-input').length;
+    const requiredAnswerInputs = answers.length;
+    if (requiredAnswerInputs > currentAnswerInputs) {
+        for (let i = currentAnswerInputs; i < requiredAnswerInputs; i++) {
+            addAnswer();
+        }
+    } else if (requiredAnswerInputs < currentAnswerInputs) {
+        const answerInputs = document.querySelectorAll('.answer-input');
+        for (let i = currentAnswerInputs - 1; i >= requiredAnswerInputs; i--) {
+            answerInputs[i].remove();
+        }
+    }
+
+    // Set answers and checkboxes
+    const answerInputs = document.querySelectorAll('.answer-input');
+    for (let i = 0; i < answers.length; i++) {
+        const answerInput = answerInputs[i];
+        if (answerInput) {
+            const textInput = answerInput.querySelector('input[type="text"]');
+            const checkboxInput = answerInput.querySelector('input[type="checkbox"]');
+            if (textInput && checkboxInput) {
+                textInput.value = answers[i];
+                checkboxInput.checked = checkboxesStatus[i + 1] === 1;
+            }
+        }
+    }
+}
+</script>
+</body>
+</html>

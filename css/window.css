@@ -1,0 +1,51 @@
+.header {
+    background: #f5f5f5; /* Slightly lighter color for the header */
+    border-radius: 1rem 1rem 0 0; /* Rounded corners only on the top */
+    padding: 1rem;
+}
+
+.header-small {
+    background: #e5e5e5; /* Slightly lighter color for the header */
+    border-radius: 1rem 1rem 0 0; /* Rounded corners only on the top */
+    padding: 0.75rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0.5rem 0.5rem rgba(20,20,20,0.4);
+    border-width: 1px;
+    border-color: rgba(0,0,0,0.4);
+    border-style: solid solid none solid;
+    height: 1rem;
+}
+
+.header h2 {
+    margin: 0;
+}
+
+.small-header-button {
+    justify-self: right;
+    background-color: rgba(0,0,0,0);
+    font-size: 1rem;
+    color: black;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition-duration: 0.2s;
+    margin-left: auto;
+    display: flex;
+}
+
+.small-header-button:hover {
+    color: #ccc;
+    cursor: pointer; /* Darken button on hover */
+}
+
+.small-header-button span {
+    font-family: 'Raleway', sans-serif;
+}
+
+.small-header-button img {
+    width: 1.2rem;
+    height: 1.2rem;
+    align-self: center;
+}
