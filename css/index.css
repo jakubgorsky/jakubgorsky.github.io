@@ -3,9 +3,22 @@
     text-align: center;
     grid-row: 2 / span 1;
     grid-column: 2 / span 1;
+    justify-self: center;
 }
 
 .main-header h2 {
+    margin-top: -3px;
+}
+
+.main-footer {
+    font-size: 1rem;
+    text-align: center;
+    grid-row: 6 / span 1;
+    grid-column: 2 / span 1;
+    justify-self: center;
+}
+
+.main-footer h2 {
     margin-top: -3px;
 }
 
@@ -24,11 +37,5 @@
     }
     100% {
         opacity: 1;
-    }
-}
-
-@media only screen and (hover: none) and (pointer: coarse) {
-    .main-header {
-        justify-self: center;
     }
 }

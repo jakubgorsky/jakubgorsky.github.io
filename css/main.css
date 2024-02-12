@@ -19,9 +19,12 @@ body {
 
 .main-grid-container {
     display: grid;
-    grid-template-columns: 28rem 28rem 28rem;
-    grid-template-rows: 1rem 3rem 1rem auto 1rem 3rem 1rem;   /* Two columns layout */
+    grid-template-columns: 1.5rem 1fr 1.5rem;
+    grid-template-rows: 1.5rem 3rem 1.5rem auto 1.5rem 3rem 1.5rem;   /* Two columns layout */
     justify-content: center; /* Center the grid horizontally */
+    height: 80vh;
+    max-width: 80vw;
+    min-width: 768px;
 }
 
 .main-flex-container {
@@ -43,15 +46,16 @@ body {
 
 /*   RESPONSIVE   */
 
-@media only screen and (hover: none) and (pointer: coarse) {
+@media only screen and (max-width: 768px), (hover: none) and (pointer: coarse) {
     body {
         min-width: fit-content;
         max-width: 100vw;
     }
     .main-grid-container {
-        grid-template-columns: 1rem 1fr 1rem;
+        grid-template-columns: 1.5rem 1fr 1.5rem;
         justify-content: center;
         width: 100%;
         height: 100vh;
+        min-width: calc(100vw - 3rem);
     }
 }
