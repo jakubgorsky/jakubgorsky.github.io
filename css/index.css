@@ -1,6 +1,12 @@
 .main-header {
     font-size: 1rem;
-    justify-self: center;
+    text-align: center;
+    grid-row: 2 / span 1;
+    grid-column: 2 / span 1;
+}
+
+.main-header h2 {
+    margin-top: -3px;
 }
 
 #feature-text::after {
@@ -23,7 +29,6 @@
 
 @media only screen and (max-width: 600px) {
     .main-header {
-        grid-row: 2 / span 1;
         justify-self: center;
     }
 }

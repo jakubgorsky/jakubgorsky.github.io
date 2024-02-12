@@ -1,10 +1,14 @@
 const carouselText = [
-    {text: "cpp", color: "red"},
-    {text: "sh", color: "red"},
-    {text: "py", color: "red"},
-    {text: "js", color: "red"},
-    {text: "html", color: "red"},
-    {text: "css", color: "red"}
+    {"text": "cpp", "color": "#00599C"},
+    {"text": "sh", "color": "#4E9A06"},
+    {"text": "py", "color": "#FFD43B"},
+    {"text": "js", "color": "#F7DF1E"},
+    {"text": "html", "color": "#E44D26"},
+    {"text": "css", "color": "#1572B6"},
+    {"text": "git", "color": "#000000"},
+    {"text": "deb", "color": "#A80030"},
+    {"text": "json", "color": "#AEB7C0"},
+    {"text": "db", "color": "#6A1B9A"}
   ]
 
   $( document ).ready(async function() {
